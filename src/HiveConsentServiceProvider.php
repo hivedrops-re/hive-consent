@@ -3,6 +3,7 @@
 namespace Hivedrops\HiveConsent;
 
 use Hivedrops\HiveConsent\Console\Commands\PublishConfig;
+use Hivedrops\HiveConsent\Console\Commands\PublishLang;
 use Illuminate\Support\ServiceProvider;
 use Hivedrops\HiveConsent\Console\Commands\PublishViews;
 
@@ -15,10 +16,11 @@ class HiveConsentServiceProvider extends ServiceProvider
      */
     public function boot() 
     {
-        // Charger les vues du package
+        // Load package views
         $this->loadViewsFrom(__DIR__.'/resources/views', 'hive-consent-banner');
+        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'hive-consent');
 
-        // Publie les vues pour la personnalisation
+        // Publish package views and files for customization
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/hive-consent'), 
         ], 'hive-consent');
@@ -27,10 +29,15 @@ class HiveConsentServiceProvider extends ServiceProvider
             __DIR__.'/config/hive-consent.php' => config_path('hive-consent.php'),
         ], 'config');
 
+        $this->publishes([
+            __DIR__.'/resources/lang' => resource_path('lang/vendor/hive-consent'),
+        ], 'lang');
+
         if($this->app->runningInConsole()) {
             $this->commands([
                 PublishViews::class,
-                PublishConfig::class
+                PublishConfig::class,
+                PublishLang::class,
             ]);
         }
     }

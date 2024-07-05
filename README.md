@@ -1,8 +1,17 @@
-# Hive Consent `Version 1.0`
+# Hive Consent
 
-![Hive Consent](assets/images/picture_modal.png)
+<img src="assets/images/presentation_hiveConsent.jpg" alt="Hive Consent Banner" height="400" />
 
 The Hive Consent package lets you add a cookie consent banner to your Laravel applications. The package is simple to use and easy to customize.
+
+## Features
+
+- Cookie consent banner
+- Customizable views
+- Customizable configuration
+- Light and dark mode
+- Multi-language support (English and French)
+- Easy to use
 
 ## Installation
 
@@ -19,18 +28,15 @@ You can install the package via composer:
 composer require hivedrops/hive-consent
 ```
 
-### Step 2: Publish the config file
+### Setp 2: Use the package
 
-You can edit url for privacy policy and cookie policy with a variable in the `env` file:
+You can use the package in your views by adding the following code:
 
-```dotenv
-HIVE_CONSENT_URL="/cookie-policy" // You can change this to your own url
-```
-
-if you want to change the default configuration, you can publish the config file:
-
-```bash
-php artisan hive-consent:publish-config
+```bladehtml
+    <body>
+        @include('hive-consent-banner::hive-consent-banner')
+        {{-- Your code here --}}
+    </body>
 ```
 
 ### Optional: Publish the views assets
@@ -42,6 +48,32 @@ php artisan hive-consent:publish-views
 ```
 
 A `hive-consent` directory will be created in your `resources/views/vendor` directory.
+
+### Optional: Publish the config file
+
+You can edit url for privacy policy and cookie policy with a variable in the `env` file:
+
+```dotenv
+HIVE_CONSENT_URL="/cookie-policy" // You can change this to your own url
+HIVE_CONSENT_LANGUAGE="en" // You can change this for "fr" if you want to use the french version
+```
+
+if you want to change the default configuration, you can publish the config file:
+
+```bash
+php artisan hive-consent:publish-config
+```
+
+### Optional: Publish the languages assets
+
+If you want to customize the languages, you can publish the languages:
+
+```bash
+php artisan hive-consent:publish-lang
+```
+
+A `hive-consent` directory will be created in your `resources/lang/vendor` directory.
+
 
 ## Usage after installation
 
