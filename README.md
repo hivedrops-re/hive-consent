@@ -13,6 +13,14 @@ The Hive Consent package lets you add a cookie consent banner to your Laravel ap
 - Multi-language support (English and French)
 - Easy to use
 
+## How to upgrade
+
+To upgrade to the latest version, just one command !
+
+```bash
+composer update hivedrops/hive-consent
+```
+
 ## Installation
 
 ### Prerequisites
