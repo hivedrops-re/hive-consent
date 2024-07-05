@@ -24,5 +24,7 @@
                 "Hivedrops\\HiveConsent\\HiveConsentServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
