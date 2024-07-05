@@ -36,7 +36,7 @@ You can install the package via composer:
 composer require hivedrops/hive-consent
 ```
 
-### Setp 2: Use the package
+### Step 2: Use the package
 
 You can use the package in your views by adding the following code:
 
