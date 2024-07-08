@@ -66,50 +66,53 @@
         const analyticsCookies = document.getElementById('analyticsCookies');
         const advertisingCookies = document.getElementById('advertisingCookies');
 
-        // Check if cookies are accepted
-        const cookiesAccepted = document.cookie.split(';').find(row => row.startsWith('cookies_accepted='));
-        if(cookiesAccepted) {
+        // Define cookie with SameSite and Secure
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        // Get Cookie
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // Verified if cookie accept
+        const cookiesAccepted = getCookie('cookies_accepted');
+        if (cookiesAccepted && cookiesAccepted === 'true') {
             cookiesBanner.style.display = 'none';
         } else {
             cookiesBanner.style.display = 'block';
         }
 
-        // Accept all cookies function
+        // Accept all cookies
         acceptCookies.addEventListener('click', function () {
-            document.cookie = 'cookies_accepted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            document.cookie = 'necessary_cookies=true; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            document.cookie = 'analytics_cookies=true; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            document.cookie = 'advertising_cookies=true; expires=Fri, 31 Dec 9999 23:59:59 GMT';
+            setCookie('cookies_accepted', 'true', 365);
+            setCookie('necessary_cookies', 'true', 365);
+            setCookie('analytics_cookies', 'true', 365);
+            setCookie('advertising_cookies', 'true', 365);
             cookiesBanner.style.display = 'none';
         });
 
-        // Refuse all cookies function
+        // Refuse all cookies
         declineCookies.addEventListener('click', function () {
-            document.cookie = 'cookies_accepted=false; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            document.cookie = 'necessary_cookies=false; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            document.cookie = 'analytics_cookies=false; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            document.cookie = 'advertising_cookies=false; expires=Fri, 31 Dec 9999 23:59:59 GMT';
+            setCookie('cookies_accepted', 'false', 365);
+            setCookie('necessary_cookies', 'false', 365);
+            setCookie('analytics_cookies', 'false', 365);
+            setCookie('advertising_cookies', 'false', 365);
             cookiesBanner.style.display = 'none';
         });
 
-        // Accept selection function
+        // Accept selection
         acceptSelection.addEventListener('click', function() {
-            document.cookie = 'cookies_accepted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            if(necessaryCookies.checked) {
-                document.cookie = 'necessary_cookies=true; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            } else {
-                document.cookie = 'necessary_cookies=false; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            }
-            if(analyticsCookies.checked) {
-                document.cookie = 'analytics_cookies=true; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            } else {
-                document.cookie = 'analytics_cookies=false; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            }
-            if(advertisingCookies.checked) {
-                document.cookie = 'advertising_cookies=true; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            } else {
-                document.cookie = 'advertising_cookies=false; expires=Fri, 31 Dec 9999 23:59:59 GMT';
-            }
+            setCookie('cookies_accepted', 'true', 365);
+            setCookie('necessary_cookies', necessaryCookies.checked ? 'true' : 'false', 365);
+            setCookie('analytics_cookies', analyticsCookies.checked ? 'true' : 'false', 365);
+            setCookie('advertising_cookies', advertisingCookies.checked ? 'true' : 'false', 365);
             cookiesBanner.style.display = 'none';
         });
 
