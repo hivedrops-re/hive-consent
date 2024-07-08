@@ -2,7 +2,7 @@
     "name": "hivedrops/hive-consent",
     "description": "This package has been designed to help you generate an RGPD (General Data Protection Regulation) compliant cookie banner. Using this package, you can easily integrate a cookie banner on your website, ensuring legal compliance with regard to the collection and management of users' personal data.",
     "license": "MIT",
-    "version": "1.1.2",
+    "version": "1.1.4",
     "autoload": {
         "psr-4": {
             "Hivedrops\\HiveConsent\\": "src/"
