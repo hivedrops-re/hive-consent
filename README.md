@@ -9,6 +9,7 @@ The Hive Consent package lets you add a cookie consent banner to your Laravel ap
 - Cookie consent banner
 - Customizable views
 - Customizable configuration
+- Customizable analytics tools (by default: Google Analytics)
 - Light and dark mode
 - Multi-language support (English and French)
 - Easy to use
@@ -41,8 +42,11 @@ composer require hivedrops/hive-consent
 You can use the package in your views by adding the following code:
 
 ```bladehtml
+    <head>
+        @include('hive-consent::hive-consent-script')
+    </head>
     <body>
-        @include('hive-consent-banner::hive-consent-banner')
+        @include('hive-consent::hive-consent-banner')
         {{-- Your code here --}}
     </body>
 ```
@@ -64,6 +68,7 @@ You can edit url for privacy policy and cookie policy with a variable in the `en
 ```dotenv
 HIVE_CONSENT_URL="/cookie-policy" // You can change this to your own url
 HIVE_CONSENT_LANGUAGE="en" // You can change this for "fr" if you want to use the french version
+HIVE_CONSENT_GOOGLE_ANALYTICS="G-XXXXXXXXXX" // You can change this to your own Google Analytics ID
 ```
 
 if you want to change the default configuration, you can publish the config file:
@@ -92,6 +97,7 @@ Here are the cookies that will be created automatically in the session:
 - `cookies_accepted`: This cookie will be created when the user accepts the cookies.
 - `necessary_cookies`: This cookie will be created when the user accepts the necessary cookies.
 - `analytics_cookies`: This cookie will be created when the user accepts the analytics cookies.
+  - If user accepts the analytics cookies, the Google Analytics script will be added to the page. Make sure to add your Google Analytics ID in the `.env` file.
 - `advertising_cookies`: This cookie will be created when the user accepts the advertising cookies.
 
 if you want to check if the user has accepted the cookies, you can use the following code:
