@@ -86,7 +86,7 @@
 
         // Verified if cookie accept
         const cookiesAccepted = getCookie('cookies_accepted');
-        if (cookiesAccepted && cookiesAccepted === 'true') {
+        if (cookiesAccepted && cookiesAccepted === 'true' || cookiesAccepted && cookiesAccepted === 'false') {
             cookiesBanner.style.display = 'none';
         } else {
             cookiesBanner.style.display = 'block';

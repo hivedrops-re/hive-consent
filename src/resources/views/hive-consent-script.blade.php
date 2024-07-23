@@ -10,7 +10,7 @@
 
     // Verified if cookie analytics accept
     const analyticsAccepted = getCookie('analytics_cookies');
-    if (analyticsAccepted && analyticsAccepted === 'true' && '{{ Config::get('hive-consent.google_analytics') }}' !== ''{
+    if (analyticsAccepted && analyticsAccepted === 'true' && '{{ Config::get('hive-consent.google_analytics') }}' !== ''){
         // Google Analytics
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
