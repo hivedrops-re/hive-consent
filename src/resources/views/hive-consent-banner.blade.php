@@ -4,7 +4,7 @@
     @php
         $lang = config('hive-consent.language');
     @endphp
-    <div x-data="{manage: false}" x-cloak id="cookiesBanner" class="fixed hidden overflow-hidden bottom-5 left-0 right-0 dark:text-white m-auto md:left-5 md:m-0 bg-white/40 dark:bg-slate-900/40 dark:border-slate-800 backdrop-blur-md drop-shadow rounded-lg w-[350px] md:w-[400px] z-50 border">
+    <div x-data="{manage: false}" x-cloak id="cookiesBanner" class="fixed hidden overflow-hidden bottom-5 left-0 right-0 dark:text-white m-auto md:left-5 md:m-0 bg-white/40 dark:bg-slate-900/40 dark:border-slate-800 backdrop-blur-md drop-shadow rounded-lg w-[350px] md:w-[400px] z-50 border overflow-y-auto max-h-[80vh]">
         <div class="p-5">
             <div class="inline-flex items-center w-full justify-between mb-3">
                 <h2 class="font-title font-bold text-xl">{{ __('hive-consent::messages.banner_title', [], $lang) }}</h2>
@@ -67,12 +67,15 @@
         const advertisingCookies = document.getElementById('advertisingCookies');
 
         // Define cookie with SameSite and Secure
-        function setCookie(name, value, days) {
+        function setCookie(name, value, days, secure = false) {
             const date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
             const expires = "expires=" + date.toUTCString();
-            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+            const secureFlag = secure ? "secure" : "";
+            document.cookie = name + "=" + value + ";" + expires + ";path=/" + secureFlag;
         }
+
+        const isSecure = window.location.protocol === 'https:';
 
         // Get Cookie
         function getCookie(name) {
