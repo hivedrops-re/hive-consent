@@ -1,5 +1,3 @@
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
 @if(request()->cookie('cookies_accepted') != true)
     @php
         $lang = config('hive-consent.language');
